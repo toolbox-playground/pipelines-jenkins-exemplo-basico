@@ -1,8 +1,12 @@
 pipeline {
     agent {
+        // docker {
+        //     image 'node:alpine'
+        //     args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount the Docker socket
+        // }
         docker {
-            image 'node:alpine'
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount the Docker socket
+            image 'docker:19.03.12-dind' // Use Docker-in-Docker image
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock' // Mount the Docker socket and use privileged mode
         }
     }
     environment {
