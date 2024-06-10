@@ -32,10 +32,6 @@ pipeline {
                 }
             }
         }
-        node {
-          def newApp = docker.build "${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
-          // newApp.push()
-        }
         // stage('Push Docker Image') {
         //     steps {
         //         script {
@@ -51,6 +47,10 @@ pipeline {
         //         }
         //     }
         // }
+    }
+    node {
+          def newApp = docker.build "${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
+          // newApp.push()
     }
     // post {
     //     always {
