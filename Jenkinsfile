@@ -17,13 +17,17 @@ pipeline {
         sh 'cd app && npm test'
       }
     }
+  }
 
-    stage('Build') {
-      steps {
+  node {
+    checkout scm
+
+    // docker.withRegistry('https://docker.io', 'credentials-id') {
+
         def customImage = docker.build("my-image:${env.BUILD_ID}")
-        customImage.push()
-        customImage.push('latest')
-      }
-    }
+
+        /* Push the container to the custom Registry */
+        // customImage.push()
+    // }
   }
 }
