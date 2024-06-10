@@ -21,4 +21,5 @@ pipeline {
         sh 'docker build -t nodejs .'
       }
     }
+  }
 }
