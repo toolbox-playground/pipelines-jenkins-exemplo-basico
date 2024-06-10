@@ -5,7 +5,7 @@ pipeline {
     }
 
   }
-  node {
+  stages {
     stage('Install') {
       steps {
         sh 'cd app && npm install'
@@ -19,14 +19,9 @@ pipeline {
     }
 
     stage('Build') {
-      steps{
-        nodejs = docker.build("my-image:${env.BUILD_ID}")
+      steps {
+        sh 'docker build -t nodejs .'
       }
-      // steps {
-      //   docker.build("my-image:${env.BUILD_ID}")
-      //   // customImage.push()
-      //   // customImage.push('latest')
-      // }
     }
   }
 }
