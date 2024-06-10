@@ -1,9 +1,10 @@
 pipeline {
   agent {
-        docker {
-            image 'node:carbon'
-            args '-u 0:0'
-        }
+    docker {
+      image 'node:carbon'
+      args '-u 0:0'
+    }
+
   }
   stages {
     stage('Install') {
@@ -11,15 +12,18 @@ pipeline {
         sh 'cd app && npm install'
       }
     }
-    stage('Test'){
-      steps{
+
+    stage('Test') {
+      steps {
         sh 'cd app && npm test'
       }
     }
-    stage('Build'){
-      steps{
+
+    stage('Build') {
+      steps {
         sh 'docker build -t nodejs .'
       }
     }
+
   }
 }
