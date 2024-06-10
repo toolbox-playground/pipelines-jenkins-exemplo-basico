@@ -7,9 +7,9 @@ pipeline {
     }
     environment {
         // Define environment variables
-        DOCKER_IMAGE_NAME = 'your-docker-image-name'
+        DOCKER_REPO = 'toolboxplayground'
+        DOCKER_IMAGE_NAME = 'nodejs-jenkins'
         DOCKER_TAG = 'latest'
-        DOCKER_REPO = 'toolboxplayground/jenkins'
     }
     stages {
         stage('Install') {
