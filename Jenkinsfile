@@ -5,7 +5,7 @@ pipeline {
     }
 
   }
-  stages {
+  node {
     stage('Install') {
       steps {
         sh 'cd app && npm install'
@@ -22,15 +22,11 @@ pipeline {
       steps{
         nodejs = docker.build("my-image:${env.BUILD_ID}")
       }
+      // steps {
+      //   docker.build("my-image:${env.BUILD_ID}")
+      //   // customImage.push()
+      //   // customImage.push('latest')
+      // }
     }
-  }
-  node {
-    checkout scm
-
-    def customImage = docker.build("my-image:${env.BUILD_ID}")
-
-    // customImage.inside {
-    //     sh 'make test'
-    // }
   }
 }
