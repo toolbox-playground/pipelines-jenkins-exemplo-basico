@@ -17,12 +17,5 @@ pipeline {
         sh 'cd app && npm test'
       }
     }
-
-    stage('Build') {
-      steps {
-        sh 'docker build -t nodejs .'
-      }
-    }
-
   }
 }
