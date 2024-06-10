@@ -19,11 +19,14 @@ pipeline {
     }
 
     stage('Build') {
-      steps {
-        docker.build("my-image:${env.BUILD_ID}")
-        // customImage.push()
-        // customImage.push('latest')
+      steps{
+        nodejs = docker.build("my-image:${env.BUILD_ID}")
       }
+      // steps {
+      //   docker.build("my-image:${env.BUILD_ID}")
+      //   // customImage.push()
+      //   // customImage.push('latest')
+      // }
     }
   }
 }
