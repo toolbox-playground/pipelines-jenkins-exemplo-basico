@@ -22,16 +22,17 @@ pipeline {
                 sh 'cd app && npm test'
             }
         }
-        // stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             // Build the Docker image
-        //             sh """
-        //             docker build -t ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} .
-        //             """
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image') {
+            agent any
+            steps {
+                script {
+                    // Build the Docker image
+                    sh """
+                    docker build -t ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} .
+                    """
+                }
+            }
+        }
         // stage('Push Docker Image') {
         //     steps {
         //         script {
