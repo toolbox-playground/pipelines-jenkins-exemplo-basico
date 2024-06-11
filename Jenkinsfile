@@ -14,16 +14,20 @@ pipeline {
     }
     stages {
         stage('Install') {
-            docker {
-                image 'node:alpine'
+            agent {
+                docker {
+                    image 'node:alpine'
+                }
             }
             steps {
                 sh 'cd app && npm install'
             }
         }
         stage('Test') {
-            docker {
-                image 'node:alpine'
+            agent {
+                docker {
+                    image 'node:alpine'
+                }
             }
             steps {
                 sh 'cd app && npm test'
