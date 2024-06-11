@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:alpine'
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount the Docker socket
-        }
-    }
+    agent none
+    // agent {
+    //     docker {
+    //         image 'node:alpine'
+    //         args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount the Docker socket
+    //     }
+    // }
     environment {
         // Define environment variables
         DOCKER_REPO = 'toolboxplayground'
@@ -13,11 +14,17 @@ pipeline {
     }
     stages {
         stage('Install') {
+            docker {
+                image 'node:alpine'
+            }
             steps {
                 sh 'cd app && npm install'
             }
         }
         stage('Test') {
+            docker {
+                image 'node:alpine'
+            }
             steps {
                 sh 'cd app && npm test'
             }
@@ -27,9 +34,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh """
-                    docker build -t ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} .
-                    """
+                    sh "docker build -t ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
                 }
             }
         }
