@@ -65,9 +65,9 @@ pipeline {
                         // Log in to Docker Hub and push the Docker image
                         sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
                         sh "docker pull ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
+                        // Select a port to test the application that is not the same as the one used by Jenkins and not the same as the one used by others applications
                         sh "docker run -d -p 8081:8080 --name jenkins-test --rm ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
                         sh "sleep 10"
-                        // Select a port to test the application that is not the same as the one used by Jenkins and not the same as the one used by others applications
                         sh "docker ps -f 'name=jenkins-test'"
                         sh "docker stop jenkins-test"
                         sh "docker logout"
