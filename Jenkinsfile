@@ -11,6 +11,7 @@ pipeline {
         DOCKER_REPO = 'toolboxplayground'
         DOCKER_IMAGE_NAME = 'nodejs-jenkins'
         DOCKER_TAG = 'latest'
+        DOCKER_CREDS = credentials('marcelobuzzettidocker')
     }
     stages {
         stage('Install') {
@@ -47,12 +48,12 @@ pipeline {
             steps {
                 script {
                     // Inject Docker Hub credentials into environment variables
-                    withCredentials([usernamePassword(credentialsId: 'marcelobuzzettidocker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    // withCredentials([usernamePassword(credentialsId: 'marcelobuzzettidocker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         // Log in to Docker Hub and push the Docker image
-                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+                        sh 'echo $DOCKER_CREDS_PSW | docker login -u $DOCKER_CREDS_USR --password-stdin'
                         sh "docker push ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
                         sh "docker logout"
-                    }
+                    // }
                 }
             }
         }
@@ -61,9 +62,9 @@ pipeline {
             steps {
                 script {
                     // Inject Docker Hub credentials into environment variables
-                    withCredentials([usernamePassword(credentialsId: 'marcelobuzzettidocker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    // withCredentials([usernamePassword(credentialsId: 'marcelobuzzettidocker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         // Log in to Docker Hub and push the Docker image
-                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+                        sh 'echo $DOCKER_CREDS_PSW | docker login -u $DOCKER_CREDS_USR --password-stdin'
                         sh "docker pull ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
                         // Select a port to test the application that is not the same as the one used by Jenkins and not the same as the one used by others applications
                         sh "docker run -d -p 8081:8080 --name jenkins-test --rm ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
@@ -71,7 +72,7 @@ pipeline {
                         sh "docker ps -f 'name=jenkins-test'"
                         sh "docker stop jenkins-test"
                         sh "docker logout"
-                    }
+                    // }
                 }
             }
         }
