@@ -56,5 +56,22 @@ pipeline {
                 }
             }
         }
+        stage('Pull ant Test Docker Image') {
+            agent any
+            steps {
+                script {
+                    // Inject Docker Hub credentials into environment variables
+                    withCredentials([usernamePassword(credentialsId: 'marcelobuzzettidocker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        // Log in to Docker Hub and push the Docker image
+                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+                        sh "docker pull ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
+                        sh "docker run -d -p 8080:8080 ${env.DOCKER_REPO}/${env.DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
+                        sh "sleep 10"
+                        sh "curl -s http://localhost:8080"
+                        sh "docker logout"
+                    }
+                }
+            }
+        }
     }
 }
