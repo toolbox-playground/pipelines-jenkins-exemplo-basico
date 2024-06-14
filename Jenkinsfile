@@ -25,7 +25,7 @@ pipeline {
                 }
             }
             steps { // Define the steps of the stage Test
-                sh 'cd app && npm test' // Execute the command to run the tests
+                sh 'cd app && npm install && npm test' // Execute the command to run the tests
             }
         }
         stage('Build Docker Image') { // Define the stage Build Docker Image
