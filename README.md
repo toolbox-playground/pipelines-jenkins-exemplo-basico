@@ -14,11 +14,21 @@ Em resumo, o Jenkins e o Docker formam uma combinação poderosa para automatiza
 
 Neste repositório será utlizado a imagem docker do jenkins (jenkins/jenkins:lts-jdk17)[https://hub.docker.com/r/jenkins/jenkins/]
 
+## Fazendo um Fork do Repositório
+
+Para iniciar, você precisa fazer um fork do repositório [https://github.com/toolbox-playground/jenkins-pipeline](https://github.com/toolbox-playground/jenkins-pipeline). Siga os passos abaixo para fazer um fork:
+
+1. Acesse o [repositório original](https://github.com/toolbox-playground/jenkins-pipeline) que você deseja fazer um fork.
+2. No canto superior direito da página, clique no botão "Fork".
+3. Isso criará uma cópia do repositório em sua conta do GitHub.
+
+Depois de ter feito o fork, você pode clonar o repositório para a sua máquina local para fazer as alterações desejadas.
+
 ## Passo-a-passo
 
 1. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
-2. Certifique-se que você está dentro do diretório `exemplos-pipelines/jenkins`.
+2. Certifique-se que você está dentro do diretório `jenkins-pipeline`.
 
 3. Construa a imagem Docker:
     ```bash
@@ -70,9 +80,10 @@ Para configurar uma Multibranch Pipeline no Jenkins e definir segredos para o us
 
 - Clique em `Create`
 
-7 `Repository HTTPS URL`: coloque o enredeço do respositório. Neste exemplo é o `https://github.com/toolbox-playground/pipelines-exemplo-basico`.
+7 `Repository HTTPS URL`: coloque o enredeço do respositório. Neste exemplo é o `https://github.com/seu-usuario/jenkins-pipeline`.
+Certifique-se de substituir o `seu-usuario` pelo seu usuário GitHub.
 
-8. Na seção "Build Configuration", by Jenkinsfile e no Script Path escreva `jenkins/Jenkinsfile`
+8. Na seção "Build Configuration", by Jenkinsfile e no Script Path escreva `dotnet/Jenkinsfile` para fazer a pipeline do .Net ou `nodejs/Jenkinsfile` para a pipeline do NodeJs.
 
 9. Clique em salvar.
 
@@ -89,6 +100,11 @@ Para configurar uma Multibranch Pipeline no Jenkins e definir segredos para o us
 - Clique em `Create`
 
 16. Clique em "Salvar" para salvar as configurações do projeto.
+
+17. Nos arquivos [Jenkinsfile .Net](./dotnet/Jenkinsfile) e [Jenkinsfile NodeJs](./nodejs/Jenkinsfile) coloque os valores corretos da seguinte variráveis:
+- DOCKER_NAMESPACE: Nome da Organização ou de usuário.
+- DOCKER_REPOSITORY: Nome do repositório
+- DOCKER_TAG: Nome da tag, normalmente é `latest`.
 
 Agora você configurou uma Multibranch Pipeline no Jenkins e definiu segredos para o usuário e senha do Docker e do GitHub. 
 

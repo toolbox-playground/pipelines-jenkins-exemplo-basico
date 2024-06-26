@@ -3,37 +3,17 @@ pipeline {
     environment {
         // Define environment variables
         DOCKER_NAMESPACE = 'toolboxplayground'
-        DOCKER_REPOSITORY = 'nodejs-jenkins'
+        DOCKER_REPOSITORY = 'dotnet-jenkins'
         DOCKER_TAG = 'latest'
         DOCKER_CREDS = credentials('toolboxdocker')
     }
     stages { // Define the stages of the pipeline
-        stage('Install') { // Define the stage Install
-            agent { // Define the agent for the stage Install (Docker)
-                docker { // Define the Docker agent
-                    image 'node:alpine' // Define the Docker image
-                }
-            }
-            steps { // Define the steps of the stage Install
-                sh 'cd app && npm install' // Execute the command to install the dependencies
-            }
-        }
-        stage('Test') { // Define the stage Test
-            agent { // Define the agent for the stage Test (Docker)
-                docker { // Define the Docker agent
-                    image 'node:alpine' // Define the Docker image
-                }
-            }
-            steps { // Define the steps of the stage Test
-                sh 'cd app && npm install && npm test' // Execute the command to run the tests
-            }
-        }
         stage('Build Docker Image') { // Define the stage Build Docker Image
             agent any // Define the agent for the stage Build Docker Image (Any)
             steps { // Define the steps of the stage Build Docker Image
                 script { // Define the script to execute
                     // Build the Docker image
-                    sh "docker build -t ${env.DOCKER_NAMESPACE}/${env.DOCKER_REPOSITORY}:${env.DOCKER_TAG} ." // Execute the command to build the Docker image
+                    sh "cd jenkins/dotnet && docker build -t ${env.DOCKER_NAMESPACE}/${env.DOCKER_REPOSITORY}:${env.DOCKER_TAG} ." // Execute the command to build the Docker image
                 }
             }
         }
