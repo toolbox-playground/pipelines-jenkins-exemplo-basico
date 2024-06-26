@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6cZ1tq9U8yvQvcXEe70ZfhN0gitIXs2AupoHr9WRq4C0zn8MsTLLIapgNMvZNQXaYzOteCtx2xXH2RbMYkTRwQ==",
+  "dgSpecHash": "SuhqwUqxNBRfLLwPoCSCnGwy+Ud5L/HjRyp8DrYrdJz7/F+9p6WTQQLQO4f6UVTg7te4wVF5B7+nx3zQ3ID0Aw==",
   "success": true,
-  "projectFilePath": "/media/marcelo/HDD/htdocs/toolbox/exemplos-pipelines/jenkins/dotnet/dotnet.csproj",
+  "projectFilePath": "/media/marcelo/HDD/htdocs/toolbox/jenkins-pipeline/dotnet/dotnet.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

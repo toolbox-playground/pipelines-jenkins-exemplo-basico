@@ -13,7 +13,7 @@ pipeline {
             steps { // Define the steps of the stage Build Docker Image
                 script { // Define the script to execute
                     // Build the Docker image
-                    sh "cd jenkins/dotnet && docker build -t ${env.DOCKER_NAMESPACE}/${env.DOCKER_REPOSITORY}:${env.DOCKER_TAG} ." // Execute the command to build the Docker image
+                    sh "cd dotnet && docker build -t ${env.DOCKER_NAMESPACE}/${env.DOCKER_REPOSITORY}:${env.DOCKER_TAG} ." // Execute the command to build the Docker image
                 }
             }
         }
