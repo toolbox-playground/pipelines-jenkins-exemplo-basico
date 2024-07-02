@@ -142,3 +142,11 @@ Após finalizar com sucesso, clique em `Histórico de Compilações`.
 Clique no link `Pipeline Jenkins >> main` e você verá o que foi feito pela pipeline.
 
 Como desafio, dentro do mesmo repositório tem uma pasta chamada nodejs que possui um aplicação simples em Node.js com os arquivos Dockerfile e Jenkinsfile, tente rodar essa pipeline no Jenkins.
+
+## Contribuindo
+
+Contribuições são bem-vindas! Por favor, leia o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para mais detalhes.
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
